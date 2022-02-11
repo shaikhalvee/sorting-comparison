@@ -1,7 +1,7 @@
 package com.project;
 
 public class InsertionSort {
-	public static void doInsertionSort(int[] sortedArray) {
+	public synchronized static void doInsertionSort(int[] sortedArray) {
 		for (int i = 1; i < sortedArray.length; i++) {
 			int j = i - 1;
 			int key = sortedArray[i];

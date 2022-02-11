@@ -33,28 +33,4 @@ public class QuickSort {
 		return index;
 	}
 
-//	private static int partitionNew(int[] array, int left, int right) {
-//		int pivot = array[right];
-//		int l = left, r = right - 1;
-//		int swap;
-//		while (l <= r) {
-//			while (l < array.length && array[l] <= pivot) {
-//				l++;
-//			}
-//			int leftBig = array[l];
-//			while (r > 0 && array[r] > pivot) {
-//				r--;
-//			}
-//			int rightBig = array[r];
-//			swap = array[l];
-//			array[l] = array[r];
-//			array[r] = swap;
-//			l++;
-//			r--;
-//		}
-//		swap = array[right];
-//		array[right] = array[l];
-//		array[l] = swap;
-//		return 0;
-//	}
 }
