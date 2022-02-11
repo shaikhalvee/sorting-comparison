@@ -21,18 +21,18 @@ public class ModifiedQuickSort {
 		int leftIndex = left;
 		int rightIndex = right - 2;
 		int swap;
-		while (leftIndex < rightIndex) {
+		for (; ; ) {
 //			while (array[leftIndex++])
 			// not using leftIndex++ because, current leftIndex has already been
 			// compared in the median calculations
 			while (array[++leftIndex] < pivot) ;
 			while (rightIndex > 0 && array[--rightIndex] > pivot) ;
-			if (leftIndex >= rightIndex) {
-				break;
-			} else {
+			if (leftIndex < rightIndex) {
 				swap = array[leftIndex];
 				array[leftIndex] = array[rightIndex];
 				array[rightIndex] = swap;
+			} else {
+				break;
 			}
 		}
 		swap = array[leftIndex];
