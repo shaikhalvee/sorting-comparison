@@ -15,22 +15,44 @@ public class QuickSort implements Sort {
 	}
 
 	private int partition(int[] array, int left, int right) {
+		int pivotIndex = (left + right) / 2;
+		int leftIndex = left;
+		int rightIndex = right;
+		int swap;
+		while (leftIndex <= rightIndex) {
+			while (array[leftIndex++] < array[pivotIndex]) ;
+			while (rightIndex > 0 && array[rightIndex--] > array[pivotIndex]) ;
+			if (leftIndex > rightIndex) {
+				break;
+			} else {
+				swap = array[leftIndex];
+				array[leftIndex] = array[rightIndex];
+				array[rightIndex] = swap;
+			}
+		}
+		swap = array[rightIndex];
+		array[rightIndex] = array[pivotIndex];
+		array[pivotIndex] = swap;
+		return rightIndex;
+	}
+
+	private int partition2(int[] array, int left, int right) {
 		// taking last or rightmost index as pivot
 		int pivot = array[right];
-		int index = left - 1;
+		int index = left;
 		int swap;
 		for (int i = left; i < right; i++) {
 			if (array[i] <= pivot) {
-				swap = array[++index];
+				swap = array[index];
 				array[index] = array[i];
 				array[i] = swap;
-//				index++;
+				index++;
 			}
 		}
-		swap = array[index + 1];
-		array[index + 1] = array[right];
+		swap = array[index];
+		array[index] = array[right];
 		array[right] = swap;
-		return index + 1;
+		return index;
 	}
 
 }
