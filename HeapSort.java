@@ -1,8 +1,8 @@
 package com.project;
 
-public class HeapSort {
+public class HeapSort implements Sort {
 
-	public static void doHeapSort(int[] array) {
+	public void doSort(int[] array) {
 		for (int i = array.length / 2 - 1; i >= 0; i--) {
 			buildMinHeap(array, array.length, i);
 		}
@@ -14,7 +14,7 @@ public class HeapSort {
 		}
 	}
 
-	private static void buildMinHeap(int[] array, int heapLength, int index) {
+	private void buildMinHeap(int[] array, int heapLength, int index) {
 		int rootIndex = index;
 		int leftIndex = (index << 1) + 1;
 		int rightIndex = (index << 1) + 2;

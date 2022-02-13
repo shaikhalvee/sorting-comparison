@@ -1,12 +1,12 @@
 package com.project;
 
-public class QuickSort {
+public class QuickSort implements Sort {
 
-	public static void doQuickSort(int[] array) {
+	public void doSort(int[] array) {
 		quickSort(array, 0, array.length - 1);
 	}
 
-	private static void quickSort(int[] array, int left, int right) {
+	private void quickSort(int[] array, int left, int right) {
 		if (left < right) {
 			int partitionIndex = partition(array, left, right);
 			quickSort(array, left, partitionIndex - 1);
@@ -14,23 +14,23 @@ public class QuickSort {
 		}
 	}
 
-	private static int partition(int[] array, int left, int right) {
+	private int partition(int[] array, int left, int right) {
 		// taking last or rightmost index as pivot
 		int pivot = array[right];
-		int index = left;
+		int index = left - 1;
 		int swap;
 		for (int i = left; i < right; i++) {
 			if (array[i] <= pivot) {
-				swap = array[index];
+				swap = array[++index];
 				array[index] = array[i];
 				array[i] = swap;
-				index++;
+//				index++;
 			}
 		}
-		swap = array[index];
-		array[index] = array[right];
+		swap = array[index + 1];
+		array[index + 1] = array[right];
 		array[right] = swap;
-		return index;
+		return index + 1;
 	}
 
 }

@@ -1,17 +1,23 @@
 package com.project;
 
-public class ModifiedQuickSort {
-	public static void doModifiedQuickSort(int[] array) {
+public class ModifiedQuickSort implements Sort {
+	private final InsertionSort insertionSort;
+
+	ModifiedQuickSort() {
+		this.insertionSort = new InsertionSort();
+	}
+
+	public void doSort(int[] array) {
 		quickSort(array, 0, array.length - 1);
 	}
 
-	private static void quickSort(int[] array, int left, int right) {
+	private void quickSort(int[] array, int left, int right) {
 		if (left + 8 < right) {
 			int partitionIndex = partitionWithMedian(array, left, right);
 			quickSort(array, left, partitionIndex - 1);
 			quickSort(array, partitionIndex + 1, right);
 		} else {
-			InsertionSort.doInsertionSort(array);
+			insertionSort.doSort(array);
 		}
 	}
 
