@@ -15,27 +15,30 @@ public class QuickSort implements Sort {
 	}
 
 	private int partition(int[] array, int left, int right) {
-		int pivotIndex = (left + right) / 2;
+		// taking middle as pivot
+		int pivot = array[left / 2 + right / 2];
 		int leftIndex = left;
 		int rightIndex = right;
 		int swap;
 		while (leftIndex <= rightIndex) {
-			while (array[leftIndex++] < array[pivotIndex]) ;
-			while (rightIndex > 0 && array[rightIndex--] > array[pivotIndex]) ;
-			if (leftIndex > rightIndex) {
-				break;
-			} else {
+			while (array[leftIndex] < pivot) {
+				leftIndex++;
+			}
+			while (rightIndex > 0 && array[rightIndex] > pivot) {
+				rightIndex--;
+			}
+			if (leftIndex <= rightIndex) {
 				swap = array[leftIndex];
 				array[leftIndex] = array[rightIndex];
 				array[rightIndex] = swap;
+				leftIndex++;
+				rightIndex--;
 			}
 		}
-		swap = array[rightIndex];
-		array[rightIndex] = array[pivotIndex];
-		array[pivotIndex] = swap;
-		return rightIndex;
+		return leftIndex;
 	}
 
+	// for some reason this partitioning is producing stackoverflow
 	private int partition2(int[] array, int left, int right) {
 		// taking last or rightmost index as pivot
 		int pivot = array[right];

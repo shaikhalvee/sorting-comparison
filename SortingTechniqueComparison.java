@@ -16,8 +16,10 @@ public class SortingTechniqueComparison {
 //		int[] ara2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 
 		// initialize arrays
-		int[] ranges = {1000, 2000, 4000, 5000, 8000, 10000,
-				20000, 40000, 50000, 60000, 80000, 100000, 300000};
+		String[] sortingAlgoList = {"Insertion Sort", "Heap Sort", "Merge Sort", "Modified Quick Sort", "Quick Sort"};
+		String[] inputTypes = {"Normal", "Sorted", "Reverse Sorted"};
+		int[] ranges = {1000, 2000, 4000, 5000, 8000, 10000, 20000,
+				30000, 40000, 50000, 80000, 100000};
 		int[][] inputArrays = new int[ranges.length][];
 		for (int i = 0; i < inputArrays.length; i++) {
 			inputArrays[i] = new int[ranges[i]];
@@ -26,23 +28,25 @@ public class SortingTechniqueComparison {
 			).limit(ranges[i]).toArray();
 		}
 
-		HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> timeTaken = calculateRuntimes(inputArrays);
-		writeOutputInFile(timeTaken);
+		HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> timeTaken = calculateRuntimes(inputArrays, sortingAlgoList, inputTypes);
+		writeOutputInFile(timeTaken, sortingAlgoList, inputTypes);
 
 //        InsertionSort.doInsertionSort(ara);
-//		QuickSort.doQuickSort(ara);
-//        ModifiedQuickSort.doModifiedQuickSort(ara);
+//		QuickSort quickSort = new QuickSort();
+//		quickSort.doSort(ara);
+//        ModifiedQuickSort modifiedQuickSort = new ModifiedQuickSort();
+//		modifiedQuickSort.doSort(ara);
 //		HeapSort.doHeapSort(ara);
 //		System.out.println(Arrays.toString(ara));
 	}
 
 	private static HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>>
-	calculateRuntimes(int[][] inputArrays) {
+	calculateRuntimes(int[][] inputArrays,
+	                  String[] sortingAlgoList,
+	                  String[] inputTypes) {
 		// initialize strings
 		Sort[] sortingMethods = {new InsertionSort(), new HeapSort(),
-				new MergeSort(), new ModifiedQuickSort()};
-		String[] sortingAlgoList = {"Insertion Sort", "Heap Sort", "Merge Sort", "Modified Quit Sort"};
-		String[] inputTypes = {"Normal", "Sorted", "Reverse Sorted"};
+				new MergeSort(), new ModifiedQuickSort(), new QuickSort()};
 		// initialize runtime matrix
 		HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> runtimeMatrix = new HashMap<>();
 		for (String sortingAlgo : sortingAlgoList) {
@@ -69,6 +73,7 @@ public class SortingTechniqueComparison {
 					Long endTime = System.nanoTime();
 					Long totalTimeTaken = endTime - startTime;
 					Pair<Integer, Long> value = new Pair<>(currentInputs.length, totalTimeTaken);
+//					Pair<Integer, Long> value = new Pair<>(currentInputs.length, totalTimeTaken / 1000000);
 					runtimeMap.add(value);
 				}
 			}
@@ -85,12 +90,13 @@ public class SortingTechniqueComparison {
 		return arrayCopy;
 	}
 
-	private static void writeOutputInFile(HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> timeTakenMatrix) {
+	private static void writeOutputInFile(HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> timeTakenMatrix,
+	                                      String[] sortingAlgoList,
+	                                      String[] inputTypes) {
 		File outputFile = new File("output_runtime.csv");
 		try {
 			boolean newFile = outputFile.createNewFile();
 			if (!newFile) {
-				System.out.println("File already exists");
 				outputFile.delete();
 				outputFile.createNewFile();
 			}
@@ -103,9 +109,9 @@ public class SortingTechniqueComparison {
 				}
 			}
 			printWriter.println();
-			for (String algorithm : timeTakenMatrix.keySet()) {
+			for (String algorithm : sortingAlgoList) {
 				HashMap<String, ArrayList<Pair<Integer, Long>>> inputStyleSet = timeTakenMatrix.get(algorithm);
-				for (String inputStyle : inputStyleSet.keySet()) {
+				for (String inputStyle : inputTypes) {
 					ArrayList<Pair<Integer, Long>> dataMatrixForEachInputStyle = inputStyleSet.get(inputStyle);
 					for (Pair<Integer, Long> dataForCurrentInputSet : dataMatrixForEachInputStyle) {
 						printWriter.println(algorithm + "," +

@@ -22,7 +22,6 @@ public class ModifiedQuickSort implements Sort {
 	}
 
 	private static int partitionWithMedian(int[] array, int left, int right) {
-		// taking last or rightmost index as pivot
 		int pivot = medianOfArray(array, left, right);
 		int leftIndex = left;
 		int rightIndex = right - 2;
