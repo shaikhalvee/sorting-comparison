@@ -1,34 +1,52 @@
 package com.project;
 
+import java.util.Collections;
+import java.util.Vector;
+
 public class HeapSort implements Sort {
 
-	public void doSort(int[] array) {
-		for (int i = array.length / 2 - 1; i >= 0; i--) {
-			buildMinHeap(array, array.length, i);
+	public Vector<Integer> heapArray;
+
+	HeapSort() {
+		heapArray = new Vector<>();
+	}
+
+	private void heapInsert(int num) {
+		heapArray.add(num);
+		int i = heapArray.size() - 1;
+		while (i > 0 && heapArray.get(i / 2) < heapArray.get(i)) {
+			Collections.swap(heapArray, i, i / 2);
+			i /= 2;
 		}
-		for (int i = array.length - 1; i >= 0; i--) {
-			int root = array[0];
-			array[0] = array[i];
-			array[i] = root;
-			buildMinHeap(array, i, 0);
+		// smallest value will always be at the root.
+	}
+
+	public void doSort(int[] array) {
+		for (int num : array) {
+			heapInsert(num);
+		}
+		for (int i = heapArray.size() - 1; i >= 0; i--) {
+			Collections.swap(heapArray, 0, i);
+			buildMinHeap(i, 0);
+		}
+		for (int i = 0; i < heapArray.size(); i++) {
+			array[i] = heapArray.get(i);
 		}
 	}
 
-	private void buildMinHeap(int[] array, int heapLength, int index) {
+	private void buildMinHeap(int heapLength, int index) {
 		int rootIndex = index;
 		int leftIndex = (index << 1) + 1;
 		int rightIndex = (index << 1) + 2;
-		if (leftIndex < heapLength && array[leftIndex] > array[rootIndex]) {
+		if (leftIndex < heapLength && heapArray.get(leftIndex) > heapArray.get(rootIndex)) {
 			rootIndex = leftIndex;
 		}
-		if (rightIndex < heapLength && array[rightIndex] > array[rootIndex]) {
+		if (rightIndex < heapLength && heapArray.get(rightIndex) > heapArray.get(rootIndex)) {
 			rootIndex = rightIndex;
 		}
 		if (rootIndex != index) {
-			int swap = array[rootIndex];
-			array[rootIndex] = array[index];
-			array[index] = swap;
-			buildMinHeap(array, heapLength, rootIndex);
+			Collections.swap(heapArray, rootIndex, index);
+			buildMinHeap(heapLength, rootIndex);
 		}
 	}
 }
