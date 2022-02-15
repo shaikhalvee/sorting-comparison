@@ -8,7 +8,7 @@ public class HeapSort implements Sort {
 	public Vector<Integer> heapArray;
 
 	HeapSort() {
-		heapArray = new Vector<>();
+		this.heapArray = new Vector<>();
 	}
 
 	private void heapInsert(int num) {
@@ -29,9 +29,10 @@ public class HeapSort implements Sort {
 			Collections.swap(heapArray, 0, i);
 			buildMinHeap(i, 0);
 		}
-		for (int i = 0; i < heapArray.size(); i++) {
+		for (int i = 0; i < array.length; i++) {
 			array[i] = heapArray.get(i);
 		}
+		heapArray.clear();
 	}
 
 	private void buildMinHeap(int heapLength, int index) {

@@ -38,7 +38,7 @@ public class QuickSort implements Sort {
 		return leftIndex;
 	}
 
-	// for some reason this partitioning is producing stackoverflow
+	// for some reason this partitioning is producing stackoverflow error
 	private int partition2(int[] array, int left, int right) {
 		// taking last or rightmost index as pivot
 		int pivot = array[right];

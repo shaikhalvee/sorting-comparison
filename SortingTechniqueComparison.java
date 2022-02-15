@@ -73,7 +73,6 @@ public class SortingTechniqueComparison {
 					Long endTime = System.nanoTime();
 					Long totalTimeTaken = endTime - startTime;
 					Pair<Integer, Long> value = new Pair<>(currentInputs.length, totalTimeTaken);
-//					Pair<Integer, Long> value = new Pair<>(currentInputs.length, totalTimeTaken / 1000000);
 					runtimeMap.add(value);
 				}
 			}
@@ -101,7 +100,8 @@ public class SortingTechniqueComparison {
 				outputFile.createNewFile();
 			}
 			PrintWriter printWriter = new PrintWriter(outputFile);
-			String[] dataToWrite = {"Sorting Algorithm", "Input Array Types", "Array Size", "Time Taken"};
+			String[] dataToWrite = {"Sorting Algorithm", "Input Array Types",
+					"Array Size", "Time Taken in NanoSecond"};
 			for (int i = 0; i < dataToWrite.length; i++) {
 				printWriter.print(dataToWrite[i]);
 				if (i != dataToWrite.length - 1) {
