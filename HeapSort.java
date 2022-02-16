@@ -32,6 +32,7 @@ public class HeapSort implements Sort {
 		for (int i = 0; i < array.length; i++) {
 			array[i] = heapArray.get(i);
 		}
+		// clearing heapArray so that for the next sort, this DS has no data.
 		heapArray.clear();
 	}
 

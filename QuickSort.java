@@ -7,21 +7,13 @@ public class QuickSort implements Sort {
 	}
 
 	private void quickSort(int[] array, int left, int right) {
-		if (left < right) {
-			int partitionIndex = partition(array, left, right);
-			quickSort(array, left, partitionIndex - 1);
-			quickSort(array, partitionIndex + 1, right);
-		}
-	}
-
-	private int partition(int[] array, int left, int right) {
-		// taking middle as pivot
-		int pivot = array[left / 2 + right / 2];
+		int pivotIndex = left / 2 + right / 2;
+		int pivot = array[pivotIndex];
 		int leftIndex = left;
 		int rightIndex = right;
 		int swap;
 		while (leftIndex <= rightIndex) {
-			while (array[leftIndex] < pivot) {
+			while (leftIndex < array.length && array[leftIndex] < pivot) {
 				leftIndex++;
 			}
 			while (rightIndex > 0 && array[rightIndex] > pivot) {
@@ -35,27 +27,11 @@ public class QuickSort implements Sort {
 				rightIndex--;
 			}
 		}
-		return leftIndex;
-	}
-
-	// for some reason this partitioning is producing stackoverflow error
-	private int partition2(int[] array, int left, int right) {
-		// taking last or rightmost index as pivot
-		int pivot = array[right];
-		int index = left;
-		int swap;
-		for (int i = left; i < right; i++) {
-			if (array[i] <= pivot) {
-				swap = array[index];
-				array[index] = array[i];
-				array[i] = swap;
-				index++;
-			}
+		if (left < rightIndex) {
+			quickSort(array, left, rightIndex);
 		}
-		swap = array[index];
-		array[index] = array[right];
-		array[right] = swap;
-		return index;
+		if (leftIndex < right) {
+			quickSort(array, leftIndex, right);
+		}
 	}
-
 }

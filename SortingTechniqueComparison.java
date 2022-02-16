@@ -11,10 +11,6 @@ import java.util.stream.IntStream;
 public class SortingTechniqueComparison {
 
 	public static void main(String[] args) {
-
-//		int[] ara = {3, 0, -4, 2, 7, 5, 4, 34, -3, -1, 0, 8, 9, 22, 11, 2, 7, 8};
-//		int[] ara2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-
 		// initialize arrays
 		String[] sortingAlgoList = {"Insertion Sort", "Heap Sort", "Merge Sort", "Modified Quick Sort", "Quick Sort"};
 		String[] inputTypes = {"Normal", "Sorted", "Reverse Sorted"};
@@ -27,17 +23,8 @@ public class SortingTechniqueComparison {
 					() -> new Random().nextInt()
 			).limit(ranges[i]).toArray();
 		}
-
 		HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>> timeTaken = calculateRuntimes(inputArrays, sortingAlgoList, inputTypes);
 		writeOutputInFile(timeTaken, sortingAlgoList, inputTypes);
-
-//        InsertionSort.doInsertionSort(ara);
-//		QuickSort quickSort = new QuickSort();
-//		quickSort.doSort(ara);
-//        ModifiedQuickSort modifiedQuickSort = new ModifiedQuickSort();
-//		modifiedQuickSort.doSort(ara);
-//		HeapSort.doHeapSort(ara);
-//		System.out.println(Arrays.toString(ara));
 	}
 
 	private static HashMap<String, HashMap<String, ArrayList<Pair<Integer, Long>>>>
