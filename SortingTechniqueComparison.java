@@ -53,7 +53,7 @@ public class SortingTechniqueComparison {
 				ArrayList<Pair<Integer, Long>> runtimeMap = sortingTypeMap.get(inputTypes[j]);
 				for (int[] currentInputs : arrayCopy) {
 					if (j == inputTypes.length - 1) {
-						Collections.reverse(Arrays.asList(currentInputs));
+						reverse(currentInputs);
 					}
 					Long startTime = System.nanoTime();
 					sortingMethods[i].doSort(currentInputs);
@@ -113,7 +113,14 @@ public class SortingTechniqueComparison {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
+	private static void reverse(int[] array) {
+		for (int i = 0; i < array.length / 2; i++) {
+			int temp = array[i];
+			array[i] = array[array.length - i - 1];
+			array[array.length - i - 1] = temp;
+		}
 	}
 
 }

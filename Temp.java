@@ -1,16 +1,19 @@
 package com.project;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Temp {
 	public static void main(String[] args) {
 		int[] ara = {3, 0, -4, 2, 7, 5, 4, 34, -3, -1, 0, 8, 9, 22, 11, 2, 7, 8};
-		HeapSort heapSort = new HeapSort();
+		int[] newArray = new int[ara.length];
+		System.arraycopy(ara, 0, newArray, 0, ara.length);
+		newArray[0] = 5;
+//		System.out.println(Arrays.toString(newArray));
+//		HeapSort heapSort = new HeapSort();
 //		heapSort.doSort(ara);
-		QuickSort quickSort = new QuickSort();
-		quickSort.doSort(ara);
-		ModifiedQuickSort modifiedQuickSort = new ModifiedQuickSort();
+//		QuickSort quickSort = new QuickSort();
+//		quickSort.doSort(ara);
+//		ModifiedQuickSort modifiedQuickSort = new ModifiedQuickSort();
 //		modifiedQuickSort.doSort(ara);
 		System.out.println(Arrays.toString(ara));
 	}
